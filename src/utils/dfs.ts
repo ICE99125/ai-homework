@@ -7,12 +7,12 @@ import {
 export class DfsEightPuzzles {
   sn: eNode; // 起始节点
   en: eNode; // 目标节点
-  deepth: number; // 最大深度
+  depth: number; // 最大深度
 
-  constructor(option: DfsOptions, deepth = 4) {
+  constructor(option: DfsOptions, depth = 4) {
     this.sn = option.startNode;
     this.en = option.endNode;
-    this.deepth = deepth;
+    this.depth = depth;
   }
 
   solveEightPuzzles() {
@@ -29,9 +29,13 @@ export class DfsEightPuzzles {
 
     let count = 0;
 
+    console.log('======查找过程======');
+
     while (stack.length) {
       const curNode = stack.pop()!; // 弹出栈顶元素
       count++;
+
+      console.log(curNode.m.flat().join(','));
 
       if (isTarget(curNode.m, this.en.m)) {
         // 找到目标结点
@@ -44,13 +48,15 @@ export class DfsEightPuzzles {
           p = p.p;
         }
 
+        console.log('======查找结束======');
+
         return {
           path: path.reverse(),
           count,
         };
       }
 
-      if (curNode.d < this.deepth) {
+      if (curNode.d < this.depth) {
         // 结点扩展
         const cNodes = getChildNodes(curNode);
 
@@ -65,5 +71,7 @@ export class DfsEightPuzzles {
         });
       }
     }
+
+    console.log('======查找结束======');
   }
 }

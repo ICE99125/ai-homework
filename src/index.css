@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+}
+
+.stl-full__screen {
+  width: 100vw;
+  overflow-y: scroll;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

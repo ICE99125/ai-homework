@@ -1,44 +1,26 @@
-import { BfsEightPuzzles } from '@utils/bfs';
-import { DfsEightPuzzles } from '@utils/dfs';
-import { A } from '@utils/A';
-import { calcTime } from '@utils/tools';
-import {
-  option1,
-  option2,
-  option3,
-  option4,
-} from '@src/test/const';
+import { Left } from '@components/left';
+import { Right } from '@components/right';
+import { Result } from '@components/result';
+import { Layout } from 'antd';
+
+const { Sider, Content } = Layout;
 
 function App() {
-  // const bfs = new BfsEightPuzzles(option3);
-
-  // const res = calcTime(
-  //   '宽度优先搜索算法',
-  //   bfs.solveEightPuzzles.bind(bfs)
-  // );
-
-  const Astar = new A(option4, 2);
-
-  const res = calcTime(
-    '深度优先搜索算法',
-    Astar.solveEightPuzzles.bind(Astar)
+  return (
+    <div className="stl-full__screen">
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider theme="light" width="25%">
+          <Left></Left>
+        </Sider>
+        <Layout>
+          <Content>
+            <Right></Right>
+          </Content>
+        </Layout>
+      </Layout>
+      <Result></Result>
+    </div>
   );
-
-  // const dfs = new DfsEightPuzzles(option1);
-
-  // const res = calcTime(
-  //   '深度优先搜索算法',
-  //   dfs.solveEightPuzzles.bind(dfs)
-  // );
-
-  if (typeof res !== 'undefined') {
-    const { path, count } = res!;
-
-    console.log(`共搜索了 ${count} 个节点.`);
-    console.log('路径为: ', path);
-  }
-
-  return <div>hello</div>;
 }
 
 export default App;

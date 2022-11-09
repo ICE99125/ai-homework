@@ -27,9 +27,12 @@ export class BfsEightPuzzles {
 
     let count = 0;
 
+    console.log('======查找过程======');
     while (queue.length) {
       const curNode = queue.shift()!; // 队首元素
       count++;
+
+      console.log(curNode.m.flat().join(','));
 
       if (isTarget(curNode.m, this.en.m)) {
         // 找到目标结点
@@ -41,6 +44,8 @@ export class BfsEightPuzzles {
           path.push(p);
           p = p.p;
         }
+
+        console.log('======查找结束======');
 
         return {
           path: path.reverse(),
@@ -61,5 +66,7 @@ export class BfsEightPuzzles {
         }
       });
     }
+
+    console.log('======查找结束======');
   }
 }

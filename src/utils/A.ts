@@ -14,6 +14,8 @@ export class A {
     this.sn = option.startNode;
     this.en = option.endNode;
     this.type = type;
+
+    console.log(`A* 算法使用启发函数 ${type}.`);
   }
 
   solveEightPuzzles() {
@@ -23,7 +25,6 @@ export class A {
     }
 
     const open: aNode[] = []; // open 表
-    const closed: aNode[] = []; // cloesd 表
 
     open.push(this.sn);
 
@@ -35,10 +36,10 @@ export class A {
 
     let count = 0;
 
+    console.log('======查找过程======');
     while (open.length) {
       const curNode = open.shift()!;
-      closed.push(curNode); // 取出 closed 表第一个元素放入 closed 表中
-
+      console.log(curNode.m.flat().join(','));
       count++;
 
       if (isTarget(curNode.m, this.en.m)) {
@@ -51,6 +52,8 @@ export class A {
           path.push(p);
           p = p.p;
         }
+
+        console.log('======查找结束======');
 
         return {
           path: path.reverse(),
@@ -78,5 +81,7 @@ export class A {
       // 根据评估函数对 open 进行升序
       open.sort((a: aNode, b: aNode) => a.f - b.f);
     }
+
+    console.log('======查找结束======');
   }
 }

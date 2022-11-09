@@ -1,0 +1,19 @@
+.left__container {
+  padding: 30px 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+.rblock {
+  height: 80px;
+  line-height: 80px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.rblock.notZero {
+  background-color: #81d4fa;
+}

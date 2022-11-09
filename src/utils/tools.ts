@@ -10,8 +10,17 @@ export function isSolvable(
   const c1 = reversePairs(sn),
     c2 = reversePairs(en);
 
-  if (c1 % 2 === c2 % 2) return true;
-  else return false;
+  const eight = sn.length === 9 ? true : false;
+
+  if (eight) {
+    // 八数码
+    if (c1 % 2 === c2 % 2) return true;
+    else return false;
+  } else {
+    // 十五数码
+    if (c1 % 3 === c2 % 3) return true;
+    else return false;
+  }
 }
 
 // 计算逆序数
@@ -193,4 +202,26 @@ export function h2(source: Matrix, target: Matrix) {
   }
 
   return dis;
+}
+
+// 一维数组转二维数组
+export function oneToTwo(arr: number[], step: number) {
+  const res = [];
+
+  for (let i = 0; i < arr.length; i += step) {
+    res.push(arr.slice(i, i + step));
+  }
+
+  return res;
+}
+
+// 判断两个二维数组内元素是否相等
+// 这里不够严谨, 没有判断两个 Matrix 是否形状一致, 只判断了元素个数是否相等
+export function isElEqual(source: Matrix, target: Matrix) {
+  const s = source.flat().sort();
+  const t = target.flat().sort();
+
+  return (
+    s.length === t.length && s.toString() === t.toString()
+  );
 }
