@@ -4,6 +4,10 @@
 
 [点击进入](https://ai-homework.vercel.app/)
 
+## 实验报告
+
+[点击进入](https://www.yuque.com/arcturus/debug/ebuqk1)
+
 ## 本地开发
 
 ```bash
