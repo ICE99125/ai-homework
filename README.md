@@ -18,7 +18,7 @@ git clone https://github.com/ICE99125/AI-Homework.git
 cd ./AI-Homework
 ```
 
-安装依赖
+安装依赖(需要下载 pnpm)
 
 ```bash
 pnpm install
