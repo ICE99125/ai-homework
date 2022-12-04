@@ -1,25 +1,38 @@
-import { Left } from '@components/left';
-import { Right } from '@components/right';
-import { Result } from '@components/result';
-import { Layout } from 'antd';
+import Contents from '@components/contents';
 
-const { Sider, Content } = Layout;
+import type { MenuProps } from 'antd';
+import { Layout, Menu } from 'antd';
+
+const { Footer, Content, Header } = Layout;
+
+const navItems: MenuProps['items'] = ['八数码'].map(
+  (label, key) => ({
+    key,
+    label,
+  })
+);
 
 function App() {
   return (
-    <div className="stl-full__screen">
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider theme="light" width="25%">
-          <Left></Left>
-        </Sider>
-        <Layout>
-          <Content>
-            <Right></Right>
-          </Content>
-        </Layout>
-      </Layout>
-      <Result></Result>
-    </div>
+    <Layout className="site-layout">
+      <Header className="site-layout-background">
+        <Menu
+          items={navItems}
+          defaultSelectedKeys={['0']}
+          mode="horizontal"
+        ></Menu>
+      </Header>
+      <Content
+        style={{ flexGrow: 1, padding: '10px 50px' }}
+      >
+        <div className="site-layout-content">
+          <Contents></Contents>
+        </div>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>
+        LianXiaobin ©2022 Created by Ant Design
+      </Footer>
+    </Layout>
   );
 }
 

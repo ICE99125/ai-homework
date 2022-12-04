@@ -9,61 +9,68 @@ import {
 } from 'react';
 
 interface Matrixprops {
-  num: number;
-  init?: number[];
+  num: number; // 矩阵大小
+  init?: number[]; // 初始值
   onChange?: (m: Matrix) => void;
 }
 
 export default function Matrix(props: Matrixprops) {
-  const { num, onChange, init } = props;
+  const { num, init, onChange } = props;
+  const rowNum = Math.sqrt(num); // 单行输入框个数
+  const size = 40; // 单个输入框尺寸
+  const span = 24 / rowNum; // 每个输入框占比
+  const gutter = 5; // 输入框间隔
 
-  const [m, setM] = useState<number[]>(
+  const [matrix, setMatrix] = useState<number[]>(
     new Array(num).fill(0)
   );
 
-  // 先执行一次, 避免啥也没输表单结点是 undefined
   useEffect(() => {
-    if (typeof init !== 'undefined') {
-      setM([...init]);
-    } else {
-      setM(new Array(num).fill(0));
-    }
+    setMatrix([...init!]);
   }, [num]);
 
   useEffect(() => {
     if (typeof onChange !== 'undefined') {
-      onChange(oneToTwo(m, Math.sqrt(num)));
+      onChange(oneToTwo(matrix, rowNum));
     }
-  }, [m]);
+  }, [matrix]);
 
-  const oneChange = useCallback(
+  const oneInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>, idx: number) => {
-      const m_ = [...m];
-      m_[idx] = Number(e.target.value);
-      setM(m_);
+      const m = [...matrix];
+      m[idx] = Number(e.target.value);
+      setMatrix(m);
     },
-    [m]
+    [matrix]
   );
 
   const inputs = useMemo(() => {
-    const _ = new Array(num).fill(0);
-    const span = 24 / Math.sqrt(num);
-
-    return _.map((_, idx) => (
+    return new Array(num).fill(0).map((_, idx) => (
       <Col span={span} key={idx}>
         <Input
           type="number"
           style={{
-            width: 40,
-            height: 40,
+            width: size,
+            height: size,
             textAlign: 'center',
           }}
-          value={m[idx] === 0 ? undefined : m[idx]}
-          onChange={(e) => oneChange(e, idx)}
+          value={
+            matrix[idx] === 0 ? undefined : matrix[idx]
+          }
+          onChange={(e) => oneInputChange(e, idx)}
         />
       </Col>
     ));
-  }, [num, m]);
+  }, [num, matrix]);
 
-  return <Row gutter={[0, 8]}>{inputs}</Row>;
+  return (
+    <Row
+      gutter={[gutter, gutter]}
+      style={{
+        width: `${(gutter + size) * rowNum}px`,
+      }}
+    >
+      {inputs}
+    </Row>
+  );
 }

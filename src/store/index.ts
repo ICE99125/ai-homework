@@ -1,47 +1,39 @@
 import { atom } from 'recoil';
 
-interface Config {
+export interface ConfigState {
   algorithm: string;
-  end: Matrix;
-  numbers: number;
+  origin: Matrix;
+  target: Matrix;
+  number: number;
   depth?: number;
-  h?: number;
-  start: Matrix;
+  heuristic?: number;
 }
 
-export const configState = atom<Config>({
+export const configState = atom<ConfigState>({
   key: 'config',
   default: {
     algorithm: 'bfs',
-    end: [],
-    numbers: 8,
+    origin: [],
+    target: [],
+    number: 8,
     depth: undefined,
-    start: [],
-    h: 1,
+    heuristic: undefined,
   },
 });
-
-interface CalsState {
-  loading: boolean;
-  have: boolean; // 是否有解了
-}
 
 // 运算状态
-export const calcState = atom<CalsState>({
-  key: 'calcState',
-  default: {
-    loading: false,
-    have: false,
-  },
+export const loadingState = atom<boolean>({
+  key: 'loading',
+  default: false,
 });
 
-interface Result {
+export interface ResultState {
   path: aNode[] | eNode[];
   time: number;
   count: number;
 }
 
-export const resultState = atom<Result>({
+export const resultState = atom<ResultState>({
   key: 'result',
   default: {
     path: [],

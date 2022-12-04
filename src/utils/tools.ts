@@ -1,3 +1,8 @@
+import { ConfigState, ResultState } from '@src/store';
+import { BfsEightPuzzles } from '@utils/bfs';
+import { DfsEightPuzzles } from '@utils/dfs';
+import { A } from '@utils/A';
+
 // 判断是否可解
 export function isSolvable(
   startNode: Matrix,
@@ -215,13 +220,97 @@ export function oneToTwo(arr: number[], step: number) {
   return res;
 }
 
-// 判断两个二维数组内元素是否相等
-// 这里不够严谨, 没有判断两个 Matrix 是否形状一致, 只判断了元素个数是否相等
-export function isElEqual(source: Matrix, target: Matrix) {
+export function isMatrixElementEqual(
+  source: Matrix,
+  target: Matrix
+) {
   const s = source.flat().sort();
   const t = target.flat().sort();
 
   return (
     s.length === t.length && s.toString() === t.toString()
   );
+}
+
+// 计算结果
+export function calcAnswer(
+  config: ConfigState
+): Promise<ResultState> {
+  return new Promise((resolve, reject) => {
+    let ai: BfsEightPuzzles | DfsEightPuzzles | A;
+
+    switch (config.algorithm) {
+      case 'bfs': {
+        ai = new BfsEightPuzzles({
+          startNode: {
+            m: config.origin,
+            d: 0,
+            p: null,
+          },
+          endNode: {
+            m: config.target,
+            d: 0,
+            p: null,
+          },
+        });
+
+        break;
+      }
+      case 'dfs': {
+        ai = new DfsEightPuzzles(
+          {
+            startNode: {
+              m: config.origin,
+              d: 0,
+              p: null,
+            },
+            endNode: {
+              m: config.target,
+              d: 0,
+              p: null,
+            },
+          },
+          config.depth
+        );
+        break;
+      }
+      case 'A*': {
+        ai = new A(
+          {
+            startNode: {
+              m: config.origin,
+              g: 0,
+              p: null,
+              f: 0,
+            },
+            endNode: {
+              m: config.target,
+              g: 0,
+              f: 0,
+              p: null,
+            },
+          },
+          config.heuristic
+        );
+
+        break;
+      }
+    }
+
+    const startTime = new Date().getTime();
+
+    const res = ai!.solveEightPuzzles();
+
+    const endTime = new Date().getTime();
+
+    if (typeof res !== 'undefined') {
+      resolve({
+        count: res.count,
+        path: res.path,
+        time: endTime - startTime,
+      });
+    } else {
+      reject('无解');
+    }
+  });
 }

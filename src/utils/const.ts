@@ -1,16 +1,16 @@
-export const eightStart = [2, 0, 3, 1, 8, 4, 7, 6, 5];
+export const eightOrigin = [2, 0, 3, 1, 8, 4, 7, 6, 5];
 
-export const eightEnd = [1, 2, 3, 8, 0, 4, 7, 6, 5];
+export const eightTarget = [1, 2, 3, 8, 0, 4, 7, 6, 5];
 
-export const fifteenStart = [
-  11, 9, 4, 15, 1, 3, 0, 12, 7, 5, 8, 6, 13, 2, 10, 14,
+export const fifteenOrigin = [
+  5, 1, 2, 4, 9, 6, 3, 8, 13, 15, 10, 11, 14, 0, 7, 12,
 ];
 
-export const fifteenEnd = [
+export const fifteenTarget = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0,
 ];
 
-export const alOptions = [
+export const algorithmOptions = [
   {
     value: 'bfs',
     label: '宽度优先搜索(BFS)',
@@ -25,7 +25,7 @@ export const alOptions = [
   },
 ];
 
-export const numOptions = [
+export const numberOptions = [
   {
     value: 9,
     label: '8',
@@ -36,7 +36,7 @@ export const numOptions = [
   },
 ];
 
-export const hOptions = [
+export const heuristicOptions = [
   {
     value: 1,
     label: 'h1',
