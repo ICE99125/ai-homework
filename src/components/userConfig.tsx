@@ -57,6 +57,8 @@ export default function UserConfig() {
 
   const onReset = useCallback(() => {
     formRef.current!.resetFields();
+    setNumber(9);
+    resetResult();
     setDfs(false);
     setA(false);
   }, []);
