@@ -17,11 +17,11 @@
 ## 本地开发
 
 ```bash
-git clone https://github.com/ICE99125/AI-Homework.git
+git clone https://github.com/ICE99125/ai-homework.git
 ```
 
 ```bash
-cd ./AI-Homework
+cd ./ai-homework
 ```
 
 安装依赖(需要下载 pnpm)
